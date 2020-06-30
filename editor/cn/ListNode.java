@@ -14,9 +14,13 @@ public class ListNode {
 
     @Override
     public String toString() {
-        return "ListNode{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        ListNode cur = this;
+        while (cur != null) {
+            stringBuilder.append(cur.val).append("->");
+            cur = cur.next;
+        }
+        stringBuilder.append("null");
+        return stringBuilder.toString();
     }
 }
