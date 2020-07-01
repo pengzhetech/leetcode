@@ -19,6 +19,7 @@ public class RemoveDuplicatesFromSortedList_83 {
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(3);
+        head.next.next.next.next = new ListNode(3);
         ListNode listNode = solution.deleteDuplicates(head);
         System.out.println(listNode);
     }
@@ -28,9 +29,13 @@ public class RemoveDuplicatesFromSortedList_83 {
         public ListNode deleteDuplicates(ListNode head) {
             ListNode cur = head;
             while (cur != null && cur.next != null) {
+                /**
+                 * 当有多个相同的数,找到第一个相同的时,cur指针不会移动,直到找到最后一个为止
+                 */
                 if (cur.next.val == cur.val) {
                     cur.next = cur.next.next;
                 } else {
+                    //移动指针
                     cur = cur.next;
                 }
             }
