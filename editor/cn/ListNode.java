@@ -12,6 +12,14 @@ public class ListNode {
         val = x;
     }
 
+    public ListNode() {
+    }
+
+    public ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
     public ListNode(int[] numbers) {
         if (numbers == null || numbers.length == 0) {
             throw new IllegalArgumentException("array can not be null or empty");
