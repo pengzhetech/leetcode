@@ -100,6 +100,5 @@ public class SplitLinkedListInParts_725 {
             return result;
         }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
-
+}
