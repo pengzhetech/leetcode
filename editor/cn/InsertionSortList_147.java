@@ -45,7 +45,32 @@ public class InsertionSortList_147 {
      */
     class Solution {
         public ListNode insertionSortList(ListNode head) {
-            return null;
+            ListNode newHead = new ListNode(Integer.MIN_VALUE);
+            newHead.next = head;
+            ListNode cur = head;
+            ListNode pre = newHead;
+            while (cur != null) {
+                //cur.val<pre.val 发现后边的数据 < 前边的数据时候 例如 12341,重新开始扫描
+                if (cur.val < pre.val) {
+                    //差在这里，没有更新头部，要注意呀
+                    ListNode newIndex = newHead.next;
+                    ListNode newPre = newHead;
+                    while (newIndex != pre && newIndex.val < cur.val) {
+                        newIndex = newIndex.next;
+                        newPre = newPre.next;
+                    }
+                    //找到位置进行节点交换位置
+                    pre.next = cur.next;
+                    cur.next = newIndex;
+                    newPre.next = cur;
+                    cur = pre.next;
+                } else {
+                    //cur.val>=pre.val 前边数据小于等于后边数据，说明已经排好序了，继续往前走
+                    cur = cur.next;
+                    pre = pre.next;
+                }
+            }
+            return newHead.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
