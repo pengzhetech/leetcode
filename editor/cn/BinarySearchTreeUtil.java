@@ -50,7 +50,6 @@ public class BinarySearchTreeUtil {
             System.out.print(node.val + "\t");
             preOrder(node.left);
             preOrder(node.right);
-
         }
     }
 
@@ -65,7 +64,7 @@ public class BinarySearchTreeUtil {
     }
 
     public static void main(String[] args) {
-        int[] treeNodes = {2, 2,4, 5, 1, 3};
+        int[] treeNodes = {2, 4, 5, 1, 3};
         //inOrder(buildTree(treeNodes));
         preOrder(buildTree(treeNodes));
     }
