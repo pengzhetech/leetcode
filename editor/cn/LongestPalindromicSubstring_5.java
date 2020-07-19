@@ -56,6 +56,8 @@ public class LongestPalindromicSubstring_5 {
             char[] charArray = s.toCharArray();
 
             //表示i,j是否是回文子串,闭区间i,j都能取到
+            //字符串s[i j]s[i⋯j]是否为回文子串，如果是，dp[i][j] = true
+            // dp[i][j]=true，如果不是，dp[i][j] = false
             boolean[][] isPalindrome = new boolean[length][length];
 
             int maxLength = 1;
