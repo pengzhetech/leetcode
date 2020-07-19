@@ -57,12 +57,14 @@ public class ThreeSum_15 {
                         res.add(nums[secondPointer]);
                         res.add(nums[thirdPointer]);
                         result.add(res);
+                        //数组是排序的并且是需要去重的,找到后如果指针不移动,或者只移动一个指针,再也不会出现
+                        // nums[secondPointer] + nums[thirdPointer] == target
                         secondPointer++;
                         thirdPointer--;
                         while (secondPointer < length && nums[secondPointer] == nums[secondPointer - 1]) {
                             secondPointer++;
                         }
-                        while (thirdPointer > secondPointer && nums[thirdPointer] == nums[thirdPointer +1]) {
+                        while (thirdPointer > secondPointer && nums[thirdPointer] == nums[thirdPointer + 1]) {
                             thirdPointer--;
                         }
                     } else if (nums[secondPointer] + nums[thirdPointer] > target) {
