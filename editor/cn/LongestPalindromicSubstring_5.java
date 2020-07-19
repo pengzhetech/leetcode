@@ -18,6 +18,9 @@
 public class LongestPalindromicSubstring_5 {
     public static void main(String[] args) {
         Solution solution = new LongestPalindromicSubstring_5().new Solution();
+
+        LongestPalindromicSubstring_5 palindromicSubstring5 = new LongestPalindromicSubstring_5();
+        System.out.println(palindromicSubstring5.bruteForceLongestPalindrome("abb2wrwerwerwerwererrrrrrc"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -28,4 +31,44 @@ public class LongestPalindromicSubstring_5 {
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+
+    private String bruteForceLongestPalindrome(String s) {
+
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+
+        int length = s.length();
+
+        //最大回文子串的长度
+        int maxLongestPalindromeLength = 1;
+        //最大回文子串的开始索引位置
+        int maxLongestPalindromeBeginIndex = 0;
+
+        char[] charArray = s.toCharArray();
+
+        //穷举s所有的子串
+        for (int i = 0; i < length - 1; i++) {//起始索引
+            for (int j = i + 1; j < length; j++) {//结束索引
+                if (isPalindrome(charArray, i, j) && j - i + 1 > maxLongestPalindromeLength) {
+                    maxLongestPalindromeBeginIndex = i;
+                    maxLongestPalindromeLength = j - i + 1;
+                }
+            }
+        }
+        return s.substring(maxLongestPalindromeBeginIndex,
+                maxLongestPalindromeBeginIndex + maxLongestPalindromeLength);
+    }
+
+
+    private boolean isPalindrome(char[] subStringArray, int beginIndex, int endIndex) {
+        while (beginIndex < endIndex) {
+            if (subStringArray[beginIndex] != subStringArray[endIndex]) {
+                return false;
+            }
+            beginIndex++;
+            endIndex--;
+        }
+        return true;
+    }
 }
