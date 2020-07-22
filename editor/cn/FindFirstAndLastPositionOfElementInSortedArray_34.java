@@ -16,15 +16,51 @@
 // Related Topics 数组 二分查找 
 // 👍 510 👎 0
 
+import java.util.Arrays;
+
 public class FindFirstAndLastPositionOfElementInSortedArray_34 {
     public static void main(String[] args) {
         Solution solution = new FindFirstAndLastPositionOfElementInSortedArray_34().new Solution();
+        int[] arr = {5, 7, 7, 8, 8, 10};
+        System.out.println(Arrays.toString(solution.searchRange(arr, 8)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
+
         public int[] searchRange(int[] nums, int target) {
-            return null;
+
+            int[] targetRange = {-1, -1};
+
+            int leftIdx = extremeInsertionIndex(nums, target, true);
+
+            // assert that `leftIdx` is within the array bounds and that `target`
+            // is actually in `nums`.
+            if (leftIdx == nums.length || nums[leftIdx] != target) {
+                return targetRange;
+            }
+
+            targetRange[0] = leftIdx;
+            targetRange[1] = extremeInsertionIndex(nums, target, false) - 1;
+
+            return targetRange;
+        }
+        // returns leftmost (or rightmost) index at which `target` should be
+        // inserted in sorted array `nums` via binary search.
+        private int extremeInsertionIndex(int[] nums, int target, boolean left) {
+            int leftIndex = 0;
+            int rightIndex = nums.length;
+
+            while (leftIndex < rightIndex) {
+                int mid = (leftIndex + rightIndex) / 2;
+                if (nums[mid] > target || (left && target == nums[mid])) {
+                    rightIndex = mid;
+                } else {
+                    leftIndex = mid + 1;
+                }
+            }
+            return leftIndex;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
