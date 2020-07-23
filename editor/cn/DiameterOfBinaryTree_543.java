@@ -23,6 +23,9 @@
 public class DiameterOfBinaryTree_543 {
     public static void main(String[] args) {
         Solution solution = new DiameterOfBinaryTree_543().new Solution();
+        int[] treeNode = {1, 2, 3, 4, 5};
+        TreeNode tree = BinarySearchTreeUtil.buildTree(treeNode);
+        System.out.println(solution.diameterOfBinaryTree(tree));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
