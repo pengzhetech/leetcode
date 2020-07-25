@@ -61,6 +61,8 @@
 // Related Topics 栈 
 // 👍 168 👎 0
 
+import java.util.Stack;
+
 public class EvaluateReversePolishNotation_150 {
     public static void main(String[] args) {
         Solution solution = new EvaluateReversePolishNotation_150().new Solution();
@@ -68,10 +70,41 @@ public class EvaluateReversePolishNotation_150 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        // 栈实现   8 ms	36.7 MB
         public int evalRPN(String[] tokens) {
-            return 0;
+            Stack<Integer> numStack = new Stack<>();
+            Integer op1, op2;
+            for (String s : tokens) {
+                switch (s) {
+                    case "+":
+                        op2 = numStack.pop();
+                        op1 = numStack.pop();
+                        numStack.push(op1 + op2);
+                        break;
+                    case "-":
+                        op2 = numStack.pop();
+                        op1 = numStack.pop();
+                        numStack.push(op1 - op2);
+                        break;
+                    case "*":
+                        op2 = numStack.pop();
+                        op1 = numStack.pop();
+                        numStack.push(op1 * op2);
+                        break;
+                    case "/":
+                        op2 = numStack.pop();
+                        op1 = numStack.pop();
+                        numStack.push(op1 / op2);
+                        break;
+                    default:
+                        numStack.push(Integer.valueOf(s));
+                        break;
+                }
+            }
+            return numStack.pop();
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
