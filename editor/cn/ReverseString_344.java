@@ -19,16 +19,31 @@
 // Related Topics 双指针 字符串 
 // 👍 256 👎 0
 
-public class ReverseString_344{
-      public static void main(String[] args) {
-           Solution solution = new ReverseString_344().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public void reverseString(char[] s) {
-
+public class ReverseString_344 {
+    public static void main(String[] args) {
+        Solution solution = new ReverseString_344().new Solution();
+        char[] chars = {'1', '2', '3'};
+       // System.out.println(solution.reverseString(chars));
+        solution.reverseString(chars);
+        System.out.println(chars);
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public void reverseString(char[] s) {
+            helper(s, 0, s.length - 1);
+        }
+
+        private void helper(char[] s, int left, int right) {
+            if (left >= right) return;
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
+            helper(s, left, right);
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}
