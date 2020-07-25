@@ -8,6 +8,9 @@
 // Related Topics 栈 哈希表 
 // 👍 442 👎 0
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class DailyTemperatures_739 {
     public static void main(String[] args) {
         Solution solution = new DailyTemperatures_739().new Solution();
@@ -16,7 +19,20 @@ public class DailyTemperatures_739 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] dailyTemperatures(int[] T) {
-            return null;
+
+            int length = T.length;
+            int[] ans = new int[length];//初始化全为0
+            Deque<Integer> stack = new ArrayDeque<>();
+
+            for (int i = 0; i < length; i++) {
+                int temperature = T[i];
+                while (!stack.isEmpty() && temperature > T[stack.peek()]) {
+                    Integer preIndex = stack.pop();
+                    ans[preIndex] = i - preIndex;
+                }
+                stack.push(i);
+            }
+            return ans;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
