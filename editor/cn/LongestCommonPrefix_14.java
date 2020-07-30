@@ -29,7 +29,14 @@ public class LongestCommonPrefix_14 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestCommonPrefix(String[] strs) {
-            return null;
+            if (strs == null || strs.length == 0) return "";
+            String prefix = strs[0];
+            for (String s : strs) {
+                while (s.indexOf(prefix) != 0) {
+                    prefix = prefix.substring(0, prefix.length() - 1);
+                }
+            }
+            return prefix;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
