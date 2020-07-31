@@ -61,7 +61,9 @@ public class DesignLinkedList_707 {
             ListNode curr = head;
             // index steps needed
             // to move from sentinel node to wanted index
-            for (int i = 0; i < index + 1; ++i) curr = curr.next;
+            for (int i = 0; i < index + 1; ++i) {
+                curr = curr.next;
+            }
             return curr.val;
         }
 
@@ -80,7 +82,10 @@ public class DesignLinkedList_707 {
         }
 
         /**
-         * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+         * Add a node of value val before the index-th node in the linked list.
+         * If index equals to the length of linked list,
+         * the node will be appended to the end of linked list
+         * If index is greater than the length, the node will not be inserted.
          */
         public void addAtIndex(int index, int val) {
             // If index is greater than the length,
@@ -93,8 +98,11 @@ public class DesignLinkedList_707 {
 
             ++size;
             // find predecessor of the node to be added
+            // 根据插入到链表的索引位置,找到前驱节点
             ListNode pred = head;
-            for (int i = 0; i < index; ++i) pred = pred.next;
+            for (int i = 0; i < index; ++i) {
+                pred = pred.next;
+            }
 
             // node to be added
             ListNode toAdd = new ListNode(val);
@@ -113,7 +121,9 @@ public class DesignLinkedList_707 {
             size--;
             // find predecessor of the node to be deleted
             ListNode pred = head;
-            for (int i = 0; i < index; ++i) pred = pred.next;
+            for (int i = 0; i < index; ++i) {
+                pred = pred.next;
+            }
 
             // delete pred.next
             pred.next = pred.next.next;
