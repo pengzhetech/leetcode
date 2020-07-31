@@ -48,13 +48,16 @@ public class LinkedListCycle_141 {
 
         node1.next = node2;
         node2.next = node3;
-       // node3.next = node1;
+        // node3.next = node1;
 
         System.out.println("test");
         System.out.println(solution.hasCycle(node1));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
+    /**
+     * 双指针法
+     */
     public class Solution {
         public boolean hasCycle(ListNode head) {
             if (head == null || head.next == null) {
@@ -62,14 +65,18 @@ public class LinkedListCycle_141 {
             }
             ListNode lowNode = head;
             ListNode fastNode = head.next;
-            while (lowNode != fastNode) {
-                if (lowNode == null || fastNode == null) {
-                    return false;
+
+            while (fastNode != null && fastNode.next != null) {
+                //快慢指针相遇,说明有环
+                if (lowNode == fastNode) {
+                    return true;
                 }
+                //慢指针走一步
                 lowNode = lowNode.next;
-                fastNode = fastNode.next;
+                //快指针走两步
+                fastNode = fastNode.next.next;
             }
-            return true;
+            return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
