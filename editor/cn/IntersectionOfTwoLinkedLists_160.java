@@ -66,7 +66,7 @@ public class IntersectionOfTwoLinkedLists_160 {
         int[] arr2 = {0, 0, 0, 0, 0, 0};
         ListNode listNode2 = new ListNode(arr2);
 
-        int[] arr3 = {5, 6, 0, 8, 4, 5};
+        int[] arr3 = {5, 0, 1, 8, 4, 5};
         ListNode listNode3 = new ListNode(arr3);
 
       /*  ListNode intersectionNode = solution.getIntersectionNode(listNode1, listNode2);
