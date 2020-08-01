@@ -9,10 +9,33 @@ public class ListNodeTest {
 
     public static void main(String[] args) {
 
-        ListNode head = new ListNode(1);
+
+        int[] arr = {1, 2, 3, 4, 5, 6};
+        ListNode listNode = new ListNode(arr);
+        System.out.println(listNode);
+
+
+        System.out.println(endOfFirstHalf(listNode));
+
+       /* ListNode head = new ListNode(1);
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
-        test(head);
+        test(head);*/
+    }
+
+
+    private static ListNode endOfFirstHalf(ListNode head) {
+
+        if (head == null) return null;
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 
     static void test(ListNode head) {
