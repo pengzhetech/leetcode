@@ -42,11 +42,13 @@ public class RemoveNthNodeFromEndOfList_19 {
             ListNode start = dummy;
             ListNode end = dummy;
 
+            //快指针先走n步,此时快指针与满指针的距离正好是n
             while (n != 0) {
                 start = start.next;
                 n--;
             }
 
+            //快指针到末尾时,满指针正好在倒数第n的位置
             while (start.next != null) {
                 end = end.next;
                 start = start.next;
