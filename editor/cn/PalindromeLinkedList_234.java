@@ -76,8 +76,8 @@ public class PalindromeLinkedList_234 {
             ListNode p1 = head;
             ListNode p2 = reversedSecond;
             boolean isPalindrome = true;
-            while (p2.next != null) {
-                if (p1.val != p2.val) isPalindrome= false;
+            while (isPalindrome && p2.next != null) {
+                if (p1.val != p2.val) isPalindrome = false;
                 p1 = p1.next;
                 p2 = p2.next;
             }
@@ -101,7 +101,7 @@ public class PalindromeLinkedList_234 {
             ListNode prev = null;
             ListNode cur = head;
 
-            while (cur!= null) {
+            while (cur != null) {
                 ListNode next = cur.next;
                 cur.next = prev;
                 prev = cur;
