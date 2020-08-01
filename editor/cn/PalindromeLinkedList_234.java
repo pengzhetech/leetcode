@@ -69,20 +69,20 @@ public class PalindromeLinkedList_234 {
             if (head == null) return false;
 
             ListNode endOfFirstHalf = endOfFirstHalf(head);
-            ListNode second = endOfFirstHalf.next;
 
-            ListNode reversedSecond = reverseList(second);
+            ListNode reversedSecond = reverseList(endOfFirstHalf.next);
 
 
             ListNode p1 = head;
             ListNode p2 = reversedSecond;
+            boolean isPalindrome = true;
             while (p2.next != null) {
-                if (p1.val != p2.val) return false;
+                if (p1.val != p2.val) isPalindrome= false;
                 p1 = p1.next;
                 p2 = p2.next;
             }
-
-            return true;
+            endOfFirstHalf.next = reverseList(reversedSecond);
+            return isPalindrome;
         }
 
         private ListNode endOfFirstHalf(ListNode head) {
