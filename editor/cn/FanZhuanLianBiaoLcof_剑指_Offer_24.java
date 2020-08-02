@@ -35,7 +35,19 @@ public class FanZhuanLianBiaoLcof_剑指_Offer_24 {
      */
     class Solution {
         public ListNode reverseList(ListNode head) {
-            return null;
+
+            if (head == null) return null;
+
+            ListNode cur = head;
+            ListNode prev = null;
+
+            while (cur != null) {
+                ListNode next = cur.next;
+                cur.next = prev;
+                prev = cur;
+                cur = next;
+            }
+            return prev;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
