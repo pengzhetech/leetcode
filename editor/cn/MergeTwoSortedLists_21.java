@@ -56,6 +56,8 @@ public class MergeTwoSortedLists_21 {
                 cur = cur.next;
             }
 
+            if (l1 != null) cur.next = l1;
+            if (l2 != null) cur.next = l2;
             return dummy.next;
         }
     }
