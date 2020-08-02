@@ -17,7 +17,7 @@ public class MergeTwoSortedLists_21 {
         ListNode l1 = new ListNode(arr1);
         ListNode l2 = new ListNode(arr2);
 
-        System.out.println(solution.mergeTwoLists(l1, l2));
+        System.out.println(solution.mergeTwoLists(l1, null));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -33,6 +33,13 @@ public class MergeTwoSortedLists_21 {
      */
     class Solution {
         public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+            if (l1 == null) {
+                return l2;
+            }
+            if (l2 == null) {
+                return l1;
+            }
 
             ListNode dummy = new ListNode(-1);
 
