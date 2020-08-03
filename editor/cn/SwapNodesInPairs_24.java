@@ -37,11 +37,14 @@ public class SwapNodesInPairs_24 {
             dummy.next = head;
             ListNode cur = dummy;
             while (cur.next != null && cur.next.next != null) {
+
                 ListNode first = cur.next;
                 ListNode second = cur.next.next;
+
                 cur.next = second;
                 first.next = second.next;
                 second.next = first;
+
                 //这样写不行,因为此时的链表的cur.next是已经交换后的节点了,我们需要的是没交换前的next
                 // cur = cur.next;
                 cur = first;
