@@ -66,7 +66,8 @@ public class BinarySearchTreeUtil {
     public static void main(String[] args) {
         int[] treeNodes = {2, 4, 5, 1, 3};
         //inOrder(buildTree(treeNodes));
-        preOrder(buildTree(treeNodes));
+      //  preOrder(buildTree(treeNodes));
+        inOrder(buildTree(treeNodes));
     }
 
 }
