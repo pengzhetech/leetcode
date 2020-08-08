@@ -1,17 +1,26 @@
 /**
  * @author pengzhe
- * @date 2020/7/5 11:13
+ * @date 2020/8/8 14:35
  * @description
  */
 
 public class Node {
-    int val;
-    Node next;
-    Node random;
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
 
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
+    public Node() {
+    }
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
     }
 }

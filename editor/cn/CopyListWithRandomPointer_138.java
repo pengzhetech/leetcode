@@ -62,12 +62,12 @@ public class CopyListWithRandomPointer_138 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public Node copyRandomList(Node head) {
+        public RandomNode copyRandomList(RandomNode head) {
             if (head == null) return null;
-            HashMap<Node, Node> map = new HashMap<>();
-            Node p = head;
+            HashMap<RandomNode, RandomNode> map = new HashMap<>();
+            RandomNode p = head;
             while (p != null) {
-                map.put(p, new Node(p.val));
+                map.put(p, new RandomNode(p.val));
                 p = p.next;
             }
             p = head;

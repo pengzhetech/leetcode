@@ -95,7 +95,7 @@ class Node {
 */
 
     class Solution {
-        public Node flatten(Node head) {
+        public RandomNode flatten(RandomNode head) {
             return null;
         }
     }
