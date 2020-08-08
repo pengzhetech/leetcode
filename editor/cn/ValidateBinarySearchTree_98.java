@@ -48,25 +48,48 @@ public class ValidateBinarySearchTree_98 {
      * }
      */
     class Solution {
-        public boolean helper(TreeNode node, Integer lower, Integer upper) {
-            if (node == null) return true;
-            int val = node.val;
-            if (lower != null && val <= lower) {
-                return false;
-            }
-            if (upper != null && val >= upper) {
-                return false;
-            }
-            if (!helper(node.right, val, upper)) {
-                return false;
-            }
-            return helper(node.left, lower, val);
-        }
+
+        long pre = -Long.MAX_VALUE;
 
         public boolean isValidBST(TreeNode root) {
-            return helper(root, null, null);
+            if (root == null) {
+                return true;
+            }
+
+            if (!isValidBST(root.left)) {
+                return false;
+            }
+
+            if (root.val <= pre) {
+                return false;
+            }
+
+            pre = root.val;
+
+            return isValidBST(root.right);
+
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+
+    public boolean helper(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) return true;
+        int val = node.val;
+        if (lower != null && val <= lower) {
+            return false;
+        }
+        if (upper != null && val >= upper) {
+            return false;
+        }
+        if (!helper(node.right, val, upper)) {
+            return false;
+        }
+        return helper(node.left, lower, val);
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, null, null);
+    }
 }
