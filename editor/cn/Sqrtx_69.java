@@ -47,4 +47,5 @@ public class Sqrtx_69 {
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+ 
 }
