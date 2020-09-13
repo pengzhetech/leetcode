@@ -22,36 +22,39 @@ import java.util.List;
 public class PascalsTriangleIi_119 {
     public static void main(String[] args) {
         Solution solution = new PascalsTriangleIi_119().new Solution();
-        System.out.println(solution.generate(3));
+        System.out.println(solution.getRow(3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        private List<Integer> generate(int rowIndex) {
-            List<Integer> ans = new ArrayList<>();
-
+        public List<Integer> getRow(int rowIndex) {
+            List<Integer> result = new ArrayList<>();
+            if (rowIndex == 0) {
+                result.add(1);
+                return result;
+            }
             if (rowIndex == 1) {
-                ans.add(1);
-                return ans;
+                result.add(1);
+                result.add(1);
+                return result;
             }
 
-            if (rowIndex == 2) {
-                ans.add(1);
-                ans.add(1);
-                return ans;
-            }
+            result.add(1);
+            result.add(1);
 
-            int x;
-            List<Integer> last = generate(rowIndex - 1);
-            for (int i = 0; i < rowIndex; i++) {
-                if (i == 0 || i == rowIndex - 1) {//一行的第一个数跟最后一个数都是1
-                    x = 1;
-                } else {//上一行的两个数相加
-                    x = last.get(i - 1) + last.get(i);
+            for (int i = 1; i < rowIndex; i++) {
+                result.add(1);
+                for (int j = 0; j < i; j++) {
+                    result.add(result.get(0) + result.get(1));
+                    result.remove(0);
                 }
-                ans.add(x);
+                result.add(1);
+                result.remove(0);
             }
-            return ans;
+
+            return result;
+
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

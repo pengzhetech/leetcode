@@ -45,7 +45,7 @@ import java.util.List;
 public class PascalsTriangle_118 {
     public static void main(String[] args) {
         Solution solution = new PascalsTriangle_118().new Solution();
-        System.out.println(solution.generate(2));
+        System.out.println(solution.generate(3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
