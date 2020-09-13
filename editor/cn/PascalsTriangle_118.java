@@ -21,9 +21,31 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 递归方法总而言之就是抓住三点：
+ * <p>
+ * 找整个递归的终止条件
+ * 找返回值
+ * 一次递归需要如何操作
+ * 找整个递归的终止条件
+ * 咱来分析一下题目，递归到numRows = 0 时或者numRows = 1时都可以终止，
+ * 因为第一行比较特殊，只有一个1,所以我们可以将其当成整个递归的终止条件，
+ * 当numRows = 1时，我们就可以终止递归向下返回值了。
+ * <p>
+ * 找返回值
+ * 找返回值，我们也需要分析下，题目要我们求的是整个杨辉三角的所有数，
+ * 那最后递归得到的应该就是 List<List<Integer>> (题目给定)，也就是每递归完一层，
+ * 我们就更新完List并返回即可，最后递归完成就是我们要的答案。
+ * <p>
+ * 一次递归需要如何操作
+ * 递归的难点就在这里，很多童靴刚学递归时，总是在这里搞晕，其实我们只需要关注一次递归即可，
+ * 因为每一层递归的过程都是一样的，我们只需要找到最上层的递归的规律，就可以了
+ * <p>
+ */
 public class PascalsTriangle_118 {
     public static void main(String[] args) {
         Solution solution = new PascalsTriangle_118().new Solution();
+        System.out.println(solution.generate(2));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
