@@ -29,6 +29,10 @@
 // Related Topics 递归 字符串 
 // 👍 44 👎 0
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class SpecialBinaryString_761 {
     public static void main(String[] args) {
         Solution solution = new SpecialBinaryString_761().new Solution();
@@ -37,7 +41,21 @@ public class SpecialBinaryString_761 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String makeLargestSpecial(String S) {
-            return null;
+            int count = 0;
+            int start = 0;
+            List<String> res = new ArrayList<>();
+            for (int i = 0; i < S.length(); i++) {
+                char cur = S.charAt(i);
+                if (cur == '1') count++;
+                else count--;
+                if (count == 0) {
+                    String temp = '1' + makeLargestSpecial(S.substring(start + 1, i)) + '0';
+                    res.add(temp);
+                    start = i + 1;
+                }
+            }
+            Collections.sort(res, Collections.reverseOrder());
+            return String.join("", res);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
