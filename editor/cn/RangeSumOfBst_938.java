@@ -42,9 +42,37 @@ public class RangeSumOfBst_938 {
      * TreeNode(int x) { val = x; }
      * }
      */
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    /**
+     * 标签：深度优先遍历
+     * 题意：这个题字面含义很难理解，本意就是求出所有 X >= L 且 X <= R 的值的和
+     * 递归终止条件：
+     * 当前节点为 null 时返回 0
+     * 当前节点 X < L 时则返回右子树之和
+     * 当前节点 X > R 时则返回左子树之和
+     * 当前节点 X >= L 且 X <= R 时则返回：当前节点值 + 左子树之和 + 右子树之和
+     * 注意点：通过判断X的大小能够避免遍历全部树的节点，比如下方的动图中，3 这个值就没有必要遍历
+     */
     class Solution {
         public int rangeSumBST(TreeNode root, int L, int R) {
-            return 0;
+            if (root == null) {
+                return 0;
+            }
+            if (root.val < L) {
+                return rangeSumBST(root.right, L, R);
+            }
+            if (root.val > R) {
+                return rangeSumBST(root.left, L, R);
+            }
+            return root.val + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
