@@ -32,6 +32,10 @@
 // Related Topics 树 递归 
 // 👍 79 👎 0
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class MinimumDistanceBetweenBstNodes_783 {
     public static void main(String[] args) {
         Solution solution = new MinimumDistanceBetweenBstNodes_783().new Solution();
@@ -48,8 +52,25 @@ public class MinimumDistanceBetweenBstNodes_783 {
      * }
      */
     class Solution {
+        List<Integer> vals;
+
         public int minDiffInBST(TreeNode root) {
-            return 0;
+            vals = new ArrayList();
+            dfs(root);
+            Collections.sort(vals);
+
+            int ans = Integer.MAX_VALUE;
+            for (int i = 0; i < vals.size() - 1; ++i)
+                ans = Math.min(ans, vals.get(i + 1) - vals.get(i));
+
+            return ans;
+        }
+
+        public void dfs(TreeNode node) {
+            if (node == null) return;
+            vals.add(node.val);
+            dfs(node.left);
+            dfs(node.right);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
