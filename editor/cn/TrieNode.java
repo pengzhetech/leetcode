@@ -6,11 +6,11 @@
 
 public class TrieNode {
     // R links to node children
-    private TrieNode[] links;
+    public TrieNode[] links;
 
-    private final int R = 26;
+    public final int R = 26;
 
-    private boolean isEnd;
+    public boolean isEnd;
 
     public TrieNode() {
         links = new TrieNode[R];

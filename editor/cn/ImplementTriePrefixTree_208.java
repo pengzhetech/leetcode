@@ -30,7 +30,7 @@ public class ImplementTriePrefixTree_208 {
         /**
          * Initialize your data structure here.
          */
-        private TrieNode root;
+        public TrieNode root;
 
         public Trie() {
             root = new TrieNode();
@@ -51,7 +51,7 @@ public class ImplementTriePrefixTree_208 {
 
         // search a prefix or whole key in trie and
         // returns the node where search ends
-        private TrieNode searchPrefix(String word) {
+        public TrieNode searchPrefix(String word) {
             TrieNode node = root;
             for (int i = 0; i < word.length(); i++) {
                 char curLetter = word.charAt(i);
@@ -78,6 +78,40 @@ public class ImplementTriePrefixTree_208 {
             TrieNode node = searchPrefix(prefix);
             return node != null;
         }
+    }
+
+    class TrieNode {
+        // R links to node children
+        public TrieNode[] links;
+
+        public final int R = 26;
+
+        public boolean isEnd;
+
+        public TrieNode() {
+            links = new TrieNode[R];
+        }
+
+        public boolean containsKey(char ch) {
+            return links[ch - 'a'] != null;
+        }
+
+        public TrieNode get(char ch) {
+            return links[ch - 'a'];
+        }
+
+        public void put(char ch, TrieNode node) {
+            links[ch - 'a'] = node;
+        }
+
+        public void setEnd() {
+            isEnd = true;
+        }
+
+        public boolean isEnd() {
+            return isEnd;
+        }
+
     }
 
 /**
