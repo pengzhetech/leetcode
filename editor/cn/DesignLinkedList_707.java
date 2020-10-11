@@ -42,6 +42,9 @@ public class DesignLinkedList_707 {
         linkedList.addAtHead(0);
         linkedList.addAtHead(1);
         linkedList.addAtTail(3);
+        System.out.println(linkedList.size);
+        System.out.println(linkedList.get(0));
+        System.out.println(linkedList.get(linkedList.size));
         //linkedList.addAtIndex(1, 2);   //链表变为1-> 2-> 3
         System.out.println(linkedList.dummy.next);
         int i = linkedList.get(1);//返回2
@@ -52,7 +55,7 @@ public class DesignLinkedList_707 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     static class MyLinkedList {
-        //最大的索引位置,索引从0开始
+        //链表中元素的个数
         private int size;
         private ListNode dummy;
 
@@ -69,7 +72,7 @@ public class DesignLinkedList_707 {
          */
         public int get(int index) {
 
-            //两种极端情况均需考虑
+            //两种极端情况均需考虑,因为链表的索引是从0开始的,索引index=size时,角标已越界
             if (index >= size || index < 0) return -1;
 
             ListNode cur = dummy;
