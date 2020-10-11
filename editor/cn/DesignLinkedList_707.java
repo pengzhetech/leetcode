@@ -38,33 +38,46 @@
 
 public class DesignLinkedList_707 {
     public static void main(String[] args) {
-        // MyLinkedList solution = new MyLinkedList();
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.addAtHead(0);
+        linkedList.addAtHead(1);
+        linkedList.addAtTail(3);
+        //linkedList.addAtIndex(1, 2);   //链表变为1-> 2-> 3
+        System.out.println(linkedList.dummy.next);
+        int i = linkedList.get(1);//返回2
+        System.out.println(i);
+        linkedList.deleteAtIndex(1);  //现在链表是1-> 3
+        linkedList.get(1);            //返回3
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
-    class MyLinkedList {
-        int size;
-        ListNode head;  // sentinel node as pseudo-head
+    static class MyLinkedList {
+        //最大的索引位置,索引从0开始
+        private int size;
+        private ListNode dummy;
 
+        /**
+         * Initialize your data structure here.
+         */
         public MyLinkedList() {
-            size = 0;
-            head = new ListNode(0);
+            this.size = 0;
+            dummy = new ListNode(0);
         }
 
         /**
          * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
          */
         public int get(int index) {
-            // if index is invalid
-            if (index < 0 || index >= size) return -1;
 
-            ListNode curr = head;
-            // index steps needed
-            // to move from sentinel node to wanted index
+            //两种极端情况均需考虑
+            if (index >= size || index < 0) return -1;
+
+            ListNode cur = dummy;
+            //因为有一个dummy节点,所以index需要加1,才能到index节点
             for (int i = 0; i < index + 1; ++i) {
-                curr = curr.next;
+                cur = cur.next;
             }
-            return curr.val;
+            return cur.val;
         }
 
         /**
@@ -82,53 +95,50 @@ public class DesignLinkedList_707 {
         }
 
         /**
-         * Add a node of value val before the index-th node in the linked list.
-         * If index equals to the length of linked list,
-         * the node will be appended to the end of linked list
-         * If index is greater than the length, the node will not be inserted.
+         * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
          */
         public void addAtIndex(int index, int val) {
-            // If index is greater than the length,
-            // the node will not be inserted.
+
             if (index > size) return;
-
-            // [so weird] If index is negative,
-            // the node will be inserted at the head of the list.
             if (index < 0) index = 0;
-
-            ++size;
-            // find predecessor of the node to be added
-            // 根据插入到链表的索引位置,找到前驱节点,找到前驱节点,单链表的节点才能插入
-            ListNode pred = head;
-            for (int i = 0; i < index; ++i) {
-                pred = pred.next;
+            size++;
+            //1:找到要插入节点的前驱节点
+            ListNode prev = dummy;
+            for (int i = 0; i < index; i++) {
+                prev = prev.next;
             }
 
-            // node to be added
             ListNode toAdd = new ListNode(val);
-            // insertion itself
-            toAdd.next = pred.next;
-            pred.next = toAdd;
+
+            toAdd.next = prev.next;
+            prev.next = toAdd;
+
         }
 
         /**
          * Delete the index-th node in the linked list, if the index is valid.
          */
         public void deleteAtIndex(int index) {
-            // if the index is invalid, do nothing
-            if (index < 0 || index >= size) return;
-
+            if (index >= size || index < 0) return;
             size--;
-            // find predecessor of the node to be deleted
-            ListNode pred = head;
-            for (int i = 0; i < index; ++i) {
-                pred = pred.next;
+            ListNode prev = dummy;
+            for (int i = 0; i < index; i++) {
+                prev = prev.next;
             }
+            prev.next = prev.next.next;
 
-            // delete pred.next
-            pred.next = pred.next.next;
         }
     }
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
 
     /**
      * Your MyLinkedList object will be instantiated and called as such:
