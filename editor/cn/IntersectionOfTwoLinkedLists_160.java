@@ -59,6 +59,7 @@
 
 public class IntersectionOfTwoLinkedLists_160 {
     public static void main(String[] args) {
+
         Solution solution = new IntersectionOfTwoLinkedLists_160().new Solution();
         int[] arr1 = {4, 1, 8, 4, 5};
         ListNode listNode1 = new ListNode(arr1);
@@ -69,9 +70,15 @@ public class IntersectionOfTwoLinkedLists_160 {
         int[] arr3 = {5, 0, 1, 8, 4, 5};
         ListNode listNode3 = new ListNode(arr3);
 
+        int[] arr4= {4};
+        ListNode listNode4 = new ListNode(arr4);
+
+        int[] arr5 = {5,5,6};
+        ListNode listNode5 = new ListNode(arr5);
+
       /*  ListNode intersectionNode = solution.getIntersectionNode(listNode1, listNode2);
         System.out.println(intersectionNode);*/
-        ListNode intersectionNode1 = solution.getIntersectionNode(listNode1, listNode3);
+        ListNode intersectionNode1 = solution.getIntersectionNode(listNode4, listNode5);
         System.out.println(intersectionNode1);
     }
 
@@ -87,6 +94,26 @@ public class IntersectionOfTwoLinkedLists_160 {
      * next = null;
      * }
      * }
+     * <p>
+     * <p>
+     * public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+     * if(headA==null||headB==null) return null;
+     * <p>
+     * ListNode pA=headA;
+     * ListNode pB=headB;
+     * <p>
+     * while(pA!=pB){
+     * pA=pA.next;
+     * pB=pB.next;
+     * if(pB==null) pB=headA;
+     * if(pA==null) pA=headB;
+     * if(pA==null&&pB==null) return null;
+     * }
+     * return pA;
+     * }
+     */
+    /**
+     * null==null;  true
      */
     public class Solution {
         public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
@@ -95,10 +122,25 @@ public class IntersectionOfTwoLinkedLists_160 {
             while (pA != pB) {
                 pA = pA == null ? headB : pA.next;
                 pB = pB == null ? headA : pB.next;
+               // if (pA == null && pB == null) return null;
             }
             return pA;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+    public class Solution2 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if (headA == null || headB == null) return null;
+            ListNode pA = headA;
+            ListNode pB = headB;
+            while (pA != pB) {
+                pA = pA.next;
+                pB = pB.next;
+                if (pB == null) pB = headA;
+                if (pA == null) pA = headB;
+            }
+            return pA;
+        }
+    }
 }
