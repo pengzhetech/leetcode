@@ -98,7 +98,7 @@ public class DesignLinkedList_707 {
 
             ++size;
             // find predecessor of the node to be added
-            // 根据插入到链表的索引位置,找到前驱节点
+            // 根据插入到链表的索引位置,找到前驱节点,找到前驱节点,单链表的节点才能插入
             ListNode pred = head;
             for (int i = 0; i < index; ++i) {
                 pred = pred.next;
