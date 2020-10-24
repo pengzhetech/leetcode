@@ -30,6 +30,8 @@
 // Related Topics 树 深度优先搜索 广度优先搜索 
 // 👍 908 👎 0
 
+import java.util.LinkedList;
+
 public class SymmetricTree_101 {
     public static void main(String[] args) {
         Solution solution = new SymmetricTree_101().new Solution();
@@ -61,4 +63,32 @@ public class SymmetricTree_101 {
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+
+    public boolean isSymmetric(TreeNode root) {
+
+        if (root == null || (root.left == null && root.right == null)) return true;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(left);
+        queue.add(right);
+
+        while (queue.size() > 0) {
+
+            TreeNode leftNode = queue.removeFirst();
+            TreeNode rightNode = queue.removeFirst();
+
+            if (leftNode == null && rightNode == null) continue;
+            if (leftNode == null || rightNode == null) return false;
+            if (leftNode.val != rightNode.val) return false;
+
+            queue.add(leftNode.left);
+            queue.add(rightNode.right);
+
+            queue.add(leftNode.right);
+            queue.add(rightNode.left);
+        }
+        return true;
+    }
 }
