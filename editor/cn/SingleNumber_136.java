@@ -17,17 +17,54 @@
 // Related Topics 位运算 哈希表 
 // 👍 1378 👎 0
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class SingleNumber_136 {
     public static void main(String[] args) {
         Solution solution = new SingleNumber_136().new Solution();
+        int[] numbers = {4, 3, 3, 1, 1, 2, 2};
+        solution.singleNumber(numbers);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 哈希表法
+     */
     class Solution {
         public int singleNumber(int[] nums) {
-            return 0;
+            AtomicInteger res = new AtomicInteger();
+            if (nums == null || nums.length == 0) return res.get();
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i : nums) {
+                Integer number = map.get(i);
+                int count = number == null ? 1 : ++number;
+                map.put(i, count);
+            }
+            map.forEach((key, value) -> {
+                if (map.get(key) == 1) res.set(key);
+            });
+            return res.get();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+
+    /**
+     * 看不懂的位运算
+     *
+     * @param nums
+     * @return
+     */
+    public int singleNumber(int[] nums) {
+        int ans = nums[0];
+        if (nums.length > 1) {
+            for (int i = 1; i < nums.length; i++) {
+                ans = ans ^ nums[i];
+            }
+        }
+        return ans;
+    }
 }
