@@ -16,18 +16,43 @@
 // Related Topics 数组 
 // 👍 398 👎 0
 
-import java.util.List;
+import java.util.*;
 
 public class FindAllNumbersDisappearedInAnArray_448 {
     public static void main(String[] args) {
         Solution solution = new FindAllNumbersDisappearedInAnArray_448().new Solution();
+        int[] numbers = {4, 3, 2, 7, 8, 2, 3, 1};
+        List<Integer> disappearedNumbers = solution.findDisappearedNumbers(numbers);
+        System.out.println(disappearedNumbers);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<Integer> findDisappearedNumbers(int[] nums) {
-            return null;
+            // Hash table for keeping track of the numbers in the array
+            // Note that we can also use a set here since we are not
+            // really concerned with the frequency of numbers.
+            HashMap<Integer, Boolean> hashTable = new HashMap<Integer, Boolean>();
+
+            // Add each of the numbers to the hash table
+            for (int i = 0; i < nums.length; i++) {
+                hashTable.put(nums[i], true);
+            }
+
+            // Response array that would contain the missing numbers
+            List<Integer> result = new LinkedList<Integer>();
+
+            // Iterate over the numbers from 1 to N and add all those
+            // that don't appear in the hash table.
+            for (int i = 1; i <= nums.length; i++) {
+                if (!hashTable.containsKey(i)) {
+                    result.add(i);
+                }
+            }
+
+            return result;
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
