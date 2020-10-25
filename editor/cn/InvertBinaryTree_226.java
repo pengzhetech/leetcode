@@ -25,6 +25,8 @@
 // Related Topics 树 
 // 👍 501 👎 0
 
+import java.util.LinkedList;
+
 public class InvertBinaryTree_226 {
     public static void main(String[] args) {
         Solution solution = new InvertBinaryTree_226().new Solution();
@@ -41,10 +43,63 @@ public class InvertBinaryTree_226 {
      * }
      */
     class Solution {
+        /**
+         * 递归解法
+         *
+         * @param root
+         * @return
+         */
         public TreeNode invertTree(TreeNode root) {
-            return null;
+            //递归函数的终止条件，节点为空时返回
+            if (root == null) {
+                return null;
+            }
+            //下面三句是将当前节点的左右子树交换
+            TreeNode tmp = root.right;
+            root.right = root.left;
+            root.left = tmp;
+            //递归交换当前节点的 左子树
+            invertTree(root.left);
+            //递归交换当前节点的 右子树
+            invertTree(root.right);
+            //函数返回时就表示当前这个节点，以及它的左右子树
+            //都已经交换完了
+            return root;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * 迭代解法
+     *
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+
+            TreeNode treeNode = queue.poll();
+
+            TreeNode right = treeNode.right;
+            treeNode.left = right;
+            treeNode.right = treeNode.left;
+
+            if (treeNode.left != null) {
+                queue.add(treeNode.left);
+            }
+
+            if (treeNode.right != null) {
+                queue.add(treeNode.right);
+            }
+        }
+
+        return root;
+    }
+
 
 }
