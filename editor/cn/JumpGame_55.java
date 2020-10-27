@@ -28,8 +28,24 @@ public class JumpGame_55 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean canJump(int[] nums) {
-            return false;
+
+            if (nums == null) {
+                return false;
+            }
+            boolean[] dp = new boolean[nums.length];
+            dp[0] = true;
+            for (int i = 1; i < nums.length; i++) {
+                for (int j = 0; j < i; j++) {
+                    // 如果之前的j节点可达，并且从此节点可以到跳到i
+                    if (dp[j] && nums[j] + j >= i) {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[nums.length - 1];
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
