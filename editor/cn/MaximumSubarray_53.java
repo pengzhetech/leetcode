@@ -21,7 +21,22 @@ public class MaximumSubarray_53 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
-            return 0;
+            if (nums == null || nums.length == 0) return 0;
+            int length = nums.length;
+
+            //dp数组
+            int[] dp = new int[length];
+
+            dp[0] = nums[0];
+
+            for (int i = 1; i < length; i++) {
+                dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            }
+            int res = dp[0];
+            for (int i = 1; i < length; i++) {
+                res = Math.max(res, dp[i]);
+            }
+            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
