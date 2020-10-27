@@ -35,33 +35,32 @@ public class CoinChange_322 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        int res = Integer.MAX_VALUE;
-
         public int coinChange(int[] coins, int amount) {
-            if (coins.length == 0) {
-                return -1;
+            if (amount < 1) {
+                return 0;
             }
-
-            findWay(coins, amount, 0);
-
-            // 如果没有任何一种硬币组合能组成总金额，返回 -1。
-            if (res == Integer.MAX_VALUE) {
-                return -1;
-            }
-            return res;
+            return coinChange(coins, amount, new int[amount]);
         }
 
-        public void findWay(int[] coins, int amount, int count) {
-            if (amount < 0) {
-                return;
+        private int coinChange(int[] coins, int rem, int[] count) {
+            if (rem < 0) {
+                return -1;
             }
-            if (amount == 0) {
-                res = Math.min(res, count);
+            if (rem == 0) {
+                return 0;
             }
-
-            for (int i = 0; i < coins.length; i++) {
-                findWay(coins, amount - coins[i], count + 1);
+            if (count[rem - 1] != 0) {
+                return count[rem - 1];
             }
+            int min = Integer.MAX_VALUE;
+            for (int coin : coins) {
+                int res = coinChange(coins, rem - coin, count);
+                if (res >= 0 && res < min) {
+                    min = 1 + res;
+                }
+            }
+            count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+            return count[rem - 1];
         }
     }
 
