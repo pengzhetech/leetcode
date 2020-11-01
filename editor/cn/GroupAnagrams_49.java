@@ -19,7 +19,7 @@
 // Related Topics 哈希表 字符串 
 // 👍 396 👎 0
 
-import java.util.List;
+import java.util.*;
 
 public class GroupAnagrams_49 {
     public static void main(String[] args) {
@@ -29,8 +29,18 @@ public class GroupAnagrams_49 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
-            return null;
+            if (strs.length == 0) return new ArrayList();
+            Map<String, List> ans = new HashMap<String, List>();
+            for (String s : strs) {
+                char[] ca = s.toCharArray();
+                Arrays.sort(ca);
+                String key = String.valueOf(ca);
+                if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+                ans.get(key).add(s);
+            }
+            return new ArrayList(ans.values());
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
