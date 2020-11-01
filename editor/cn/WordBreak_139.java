@@ -30,7 +30,9 @@
 // Related Topics 动态规划 
 // 👍 591 👎 0
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WordBreak_139 {
     public static void main(String[] args) {
@@ -40,8 +42,20 @@ public class WordBreak_139 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean wordBreak(String s, List<String> wordDict) {
-            return false;
+            Set<String> wordDictSet = new HashSet(wordDict);
+            boolean[] dp = new boolean[s.length() + 1];
+            dp[0] = true;
+            for (int i = 1; i <= s.length(); i++) {
+                for (int j = 0; j < i; j++) {
+                    if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[s.length()];
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
