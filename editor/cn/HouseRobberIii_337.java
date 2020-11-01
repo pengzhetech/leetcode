@@ -32,25 +32,46 @@
 // Related Topics 树 深度优先搜索 
 // 👍 424 👎 0
 
-public class HouseRobberIii_337{
-      public static void main(String[] args) {
-           Solution solution = new HouseRobberIii_337().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public int rob(TreeNode root) {
-        return 0;
+import java.util.HashMap;
+
+public class HouseRobberIii_337 {
+    public static void main(String[] args) {
+        Solution solution = new HouseRobberIii_337().new Solution();
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public int rob(TreeNode root) {
+            HashMap<TreeNode, Integer> memo = new HashMap<>();
+            return robInternal(root, memo);
+        }
+
+        public int robInternal(TreeNode root, HashMap<TreeNode, Integer> memo) {
+            if (root == null) return 0;
+            if (memo.containsKey(root)) return memo.get(root);
+            int money = root.val;
+
+            if (root.left != null) {
+                money += (robInternal(root.left.left, memo) + robInternal(root.left.right, memo));
+            }
+            if (root.right != null) {
+                money += (robInternal(root.right.left, memo) + robInternal(root.right.right, memo));
+            }
+            int result = Math.max(money, robInternal(root.left, memo) + robInternal(root.right, memo));
+            memo.put(root, result);
+            return result;
+        }
+
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}

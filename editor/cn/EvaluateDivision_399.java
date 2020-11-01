@@ -22,7 +22,9 @@
 // Related Topics 并查集 图 
 // 👍 182 👎 0
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EvaluateDivision_399 {
     public static void main(String[] args) {
@@ -31,9 +33,96 @@ public class EvaluateDivision_399 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        /**
+         * key : 当前节点
+         * value : 其父节点
+         */
+        private Map<String, String> parents = new HashMap<>();
+        /**
+         * key : 当前节点
+         * value : 父节点/当前节点
+         */
+        private Map<String, Double> values = new HashMap<>();
+
         public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-            return null;
+            for (int i = 0; i < equations.size(); i++) {
+                union(equations.get(i).get(0), equations.get(i).get(1), values[i]);
+            }
+            double[] result = new double[queries.size()];
+            for (int i = 0; i < queries.size(); i++) {
+                String e = queries.get(i).get(0);
+                String q = queries.get(i).get(1);
+                if (!(parents.containsKey(e) && parents.containsKey(q))) {
+                    result[i] = -1;
+                    continue;
+                }
+                if (e.equals(q)) {
+                    result[i] = 1;
+                    continue;
+                }
+                String r1 = root(e);
+                String r2 = root(q);
+                if (!r1.equals(r2)) {
+                    // 如果两者不相等，说明两个节点是不连通的
+                    result[i] = -1;
+                    continue;
+                }
+                result[i] = pm(q) / pm(e);
+            }
+            return result;
         }
+
+        private void union(String parent, String child, double value) {
+            add(parent);
+            add(child);
+            String r1 = root(parent);
+            String r2 = root(child);
+            if (!r1.equals(r2)) {
+                parents.put(r2, r1);
+                values.put(r2, value * (pm(parent) / pm(child)));
+            }
+        }
+
+        private void add(String x) {
+            if (!parents.containsKey(x)) {
+                parents.put(x, x);
+                values.put(x, 1.0);
+            }
+        }
+
+
+        /**
+         * 找到x的根节点
+         */
+        private String root(String x) {
+            while (!parents.get(x).equals(x)) {
+                x = parents.get(x);
+            }
+            return x;
+        }
+
+
+        /**
+         * 循环的pm函数
+         */
+        private double pm(String x) {
+            double v = 1;
+            while (!parents.get(x).equals(x)) {
+                v *= values.get(x);
+                x = parents.get(x);
+            }
+            return v;
+        }
+
+//    /**
+//     * 递归的pm函数
+//     * @param x
+//     * @return
+//     */
+//    private double pm(String x){
+//        return parents.get(x).equals(x)?1:values.get(x)*pm(parents.get(x));
+//    }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

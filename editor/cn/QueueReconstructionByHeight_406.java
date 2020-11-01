@@ -16,6 +16,11 @@
 // Related Topics 贪心算法 
 // 👍 407 👎 0
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class QueueReconstructionByHeight_406 {
     public static void main(String[] args) {
         Solution solution = new QueueReconstructionByHeight_406().new Solution();
@@ -24,7 +29,21 @@ public class QueueReconstructionByHeight_406 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[][] reconstructQueue(int[][] people) {
-            return null;
+            Arrays.sort(people, new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    // if the heights are equal, compare k-values
+                    return o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0];
+                }
+            });
+
+            List<int[]> output = new LinkedList<>();
+            for (int[] p : people) {
+                output.add(p[1], p);
+            }
+
+            int n = people.length;
+            return output.toArray(new int[n][2]);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

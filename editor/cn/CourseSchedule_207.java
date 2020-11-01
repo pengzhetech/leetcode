@@ -30,6 +30,9 @@
 // Related Topics 深度优先搜索 广度优先搜索 图 拓扑排序 
 // 👍 409 👎 0
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CourseSchedule_207 {
     public static void main(String[] args) {
         Solution solution = new CourseSchedule_207().new Solution();
@@ -38,9 +41,28 @@ public class CourseSchedule_207 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean canFinish(int numCourses, int[][] prerequisites) {
-            return false;
+            List<List<Integer>> adjacency = new ArrayList<>();
+            for (int i = 0; i < numCourses; i++)
+                adjacency.add(new ArrayList<>());
+            int[] flags = new int[numCourses];
+            for (int[] cp : prerequisites)
+                adjacency.get(cp[1]).add(cp[0]);
+            for (int i = 0; i < numCourses; i++)
+                if (!dfs(adjacency, flags, i)) return false;
+            return true;
+        }
+
+        private boolean dfs(List<List<Integer>> adjacency, int[] flags, int i) {
+            if (flags[i] == 1) return false;
+            if (flags[i] == -1) return true;
+            flags[i] = 1;
+            for (Integer j : adjacency.get(i))
+                if (!dfs(adjacency, flags, j)) return false;
+            flags[i] = -1;
+            return true;
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
