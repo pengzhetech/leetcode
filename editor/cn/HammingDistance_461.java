@@ -30,7 +30,14 @@ public class HammingDistance_461 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int hammingDistance(int x, int y) {
-            return 0;
+            int xor = x ^ y;
+            int distance = 0;
+            while (xor != 0) {
+                if (xor % 2 == 1)
+                    distance += 1;
+                xor = xor >> 1;
+            }
+            return distance;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
