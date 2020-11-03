@@ -39,6 +39,9 @@
 //输出: true 
 // Related Topics 栈 字符串
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Stack;
 
 public class ValidParentheses_20 {
@@ -80,6 +83,29 @@ public class ValidParentheses_20 {
             return (correct == wordArray.length) ? true : false;
         }
     }
+
+    class Solution2 {
+        private final Map<Character, Character> map = new HashMap<Character, Character>() {{
+            put('{', '}');
+            put('[', ']');
+            put('(', ')');
+            put('?', '?');
+        }};
+
+        public boolean isValid(String s) {
+            if (s.length() > 0 && !map.containsKey(s.charAt(0))) return false;
+            LinkedList<Character> stack = new LinkedList<Character>() {{
+                add('?');
+            }};
+            for (Character c : s.toCharArray()) {
+                if (map.containsKey(c)) stack.addLast(c);
+                else if (map.get(stack.removeLast()) != c) return false;
+            }
+            return stack.size() == 1;
+        }
+    }
+
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

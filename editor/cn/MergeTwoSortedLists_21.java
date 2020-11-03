@@ -24,7 +24,7 @@ public class MergeTwoSortedLists_21 {
     /**
      * Definition for singly-linked list.
      * public class ListNode {
-     * int val;
+     * int val;f\
      * ListNode next;
      * ListNode() {}
      * ListNode(int val) { this.val = val; }
