@@ -30,10 +30,13 @@ public class AddTwoNumbers_2 {
      * ListNode(int x) { val = x; }
      * }
      */
+    /**
+     * 每次新增一个节点,拼成一个新链表
+     */
     class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            ListNode pre = new ListNode(0);
-            ListNode cur = pre;
+            ListNode dummy = new ListNode(0);
+            ListNode cur = dummy;
             int carry = 0;
             while (l1 != null || l2 != null) {
                 int x = l1 == null ? 0 : l1.val;
@@ -43,17 +46,21 @@ public class AddTwoNumbers_2 {
                 carry = sum / 10;
                 sum = sum % 10;
                 cur.next = new ListNode(sum);
-
+                //移动cur
                 cur = cur.next;
-                if (l1 != null)
+                if (l1 != null) {
+                    //移动l1
                     l1 = l1.next;
-                if (l2 != null)
+                }
+                if (l2 != null) {
+                    //移动l2
                     l2 = l2.next;
+                }
             }
             if (carry == 1) {
                 cur.next = new ListNode(carry);
             }
-            return pre.next;
+            return dummy.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
