@@ -23,14 +23,33 @@
 // 
 // Related Topics 哈希表 双指针 字符串 Sliding Window
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class LongestSubstringWithoutRepeatingCharacters_3 {
     public static void main(String[] args) {
-        Solution solution = new LongestSubstringWithoutRepeatingCharacters_3().new Solution();
-        int i = solution.lengthOfLongestSubstring("12312423423423");
-        System.out.println(i);
+        // Solution solution = new LongestSubstringWithoutRepeatingCharacters_3().new Solution();
+        //int i = solution.lengthOfLongestSubstring("12312423423423");
+        //System.out.println(i);
+        //
+        int pwwkew = lengthOfLongestSubstring("pwwkew");
+        System.out.println(pwwkew);
+    }
+
+    public static int lengthOfLongestSubstring(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int end = 0, start = 0; end < n; end++) {
+            char alpha = s.charAt(end);
+            if (map.containsKey(alpha)) {
+                start = Math.max(map.get(alpha), start);
+            }
+            ans = Math.max(ans, end - start + 1);
+            map.put(s.charAt(end), end + 1);
+        }
+        return ans;
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -57,6 +76,8 @@ public class LongestSubstringWithoutRepeatingCharacters_3 {
             return ans;
         }
     }
+
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
