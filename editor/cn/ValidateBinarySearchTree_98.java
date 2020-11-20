@@ -92,4 +92,19 @@ public class ValidateBinarySearchTree_98 {
     public boolean isValidBST(TreeNode root) {
         return helper(root, null, null);
     }
+
+    private boolean helper2(TreeNode root,Integer lower,Integer upper){
+        if(root==null) return true;
+        //根节点的值
+        int val=root.val;
+        //lower||upper为null说明是初始的root
+        if(lower!=null&&lower>=val)return false;
+        if(upper!=null&&upper<=val) return false;
+        //左子树
+        if(!helper2(root.left,lower,val))return false;
+        //右子树
+        if(!helper2(root.right,val,upper))return false;
+
+        return true;
+    }
 }
