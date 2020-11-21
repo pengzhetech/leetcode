@@ -5,6 +5,7 @@
  */
 
 public class TrieNode {
+
     // R links to node children
     public TrieNode[] links;
 
