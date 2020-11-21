@@ -41,6 +41,8 @@ public class BinaryTreeMaximumPathSum_124 {
      * TreeNode right;
      * TreeNode(int x) { val = x; }
      * }
+     *
+     *
      */
     class Solution {
         int maxSum = Integer.MIN_VALUE;
@@ -50,6 +52,11 @@ public class BinaryTreeMaximumPathSum_124 {
             return maxSum;
         }
 
+        /**
+         * 递归返回每个节点的最大贡献值,在递归过程中,枚举每个根节点的路径最大和
+         * @param node
+         * @return
+         */
         public int maxGain(TreeNode node) {
             if (node == null) {
                 return 0;
