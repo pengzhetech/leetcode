@@ -26,6 +26,11 @@
 // Related Topics 树 
 // 👍 419 👎 0
 
+import sun.awt.image.ImageWatched;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class MergeTwoBinaryTrees_617 {
     public static void main(String[] args) {
         Solution solution = new MergeTwoBinaryTrees_617().new Solution();
@@ -63,4 +68,34 @@ public class MergeTwoBinaryTrees_617 {
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null || t2 == null) return t1 == null ? t2 : t1;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(t1);
+        queue.add(t2);
+
+        while (queue.size() > 0) {
+            TreeNode left = queue.remove();
+            TreeNode right = queue.remove();
+
+            left.val += right.val;
+
+            if (left.left != null && right.left != null) {
+                queue.add(left.left);
+                queue.add(right.left);
+            } else if (left.left == null) {
+                left.left = right.left;
+            }
+
+            if (left.right != null && right.right != null) {
+                queue.add(left.right);
+                queue.add(right.right);
+            } else if (left.right == null) {
+                left.right = right.right;
+            }
+        }
+        return t1;
+    }
 }
