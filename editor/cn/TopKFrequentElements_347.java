@@ -31,6 +31,10 @@ import java.util.*;
 public class TopKFrequentElements_347 {
     public static void main(String[] args) {
         Solution solution = new TopKFrequentElements_347().new Solution();
+        int[] array = {1,1,1,1,2,2,3,3,3,3,4,4,4,4,4,4,4,5,555,5,5,555,5,5,55,55};
+        List<Integer> integers = topKFrequent(array, 4);
+        System.out.println(integers);
+
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -66,6 +70,33 @@ public class TopKFrequentElements_347 {
         }
     }
 
+    public static List<Integer> topKFrequent(int[] nums, int k) {
+        // 使用字典，统计每个元素出现的次数，元素为键，元素出现的次数为值
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+        // 遍历map，用最小堆保存频率最大的k个元素
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(map::get));
+        for (Integer key : map.keySet()) {
+            if (pq.size() < k) {
+                pq.add(key);
+            } else if (map.get(key) > map.get(pq.peek())) {
+                pq.remove();
+                pq.add(key);
+            }
+        }
+        // 取出最小堆中的元素
+        List<Integer> res = new ArrayList<>();
+        while (!pq.isEmpty()) {
+            res.add(pq.remove());
+        }
+        return res;
+    }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
