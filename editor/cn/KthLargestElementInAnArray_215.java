@@ -17,6 +17,7 @@
 // Related Topics 堆 分治算法 
 // 👍 613 👎 0
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class KthLargestElementInAnArray_215 {
@@ -80,5 +81,18 @@ public class KthLargestElementInAnArray_215 {
     }
 
 //leetcode submit region end(Prohibit modification and deletion)
+
+    public int findKthLargest(int[] nums, int k) {
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a));
+        for (int num : nums) {
+            minHeap.add(num);
+        }
+
+        for(int i=0;i<nums.length-k;i++){
+            minHeap.poll();
+        }
+        return minHeap.peek();
+    }
 
 }
