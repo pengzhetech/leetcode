@@ -16,10 +16,10 @@
 // Related Topics 字符串 动态规划 
 // 👍 853 👎 0
 
+import java.util.Stack;
+
 public class LongestValidParentheses_32 {
-    public static void main(String[] args) {
-        Solution solution = new LongestValidParentheses_32().new Solution();
-    }
+
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
@@ -41,5 +41,34 @@ public class LongestValidParentheses_32 {
     }
 
 //leetcode submit region end(Prohibit modification and deletion)
+
+    public static void main(String[] args) {
+        int validParentheses = longestValidParentheses(")()())");
+        System.out.println(validParentheses);
+
+    }
+
+    public static int longestValidParentheses(String s) {
+
+        int longest = 0;
+
+        Stack<Integer> stack = new Stack<>();
+        stack.add(-1);
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.add(i);
+            } else {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    stack.add(i);
+                } else {
+                    longest = Math.max(longest, i - stack.peek());
+                }
+            }
+        }
+        return longest;
+
+    }
 
 }
