@@ -44,4 +44,11 @@ public class ListNode {
         stringBuilder.append("null");
         return stringBuilder.toString();
     }
+
+    public static void main(String[] args) {
+        StringBuilder s = new StringBuilder();
+        s.setLength(0);
+
+
+    }
 }
