@@ -24,6 +24,7 @@ public class TwoSum_1 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
