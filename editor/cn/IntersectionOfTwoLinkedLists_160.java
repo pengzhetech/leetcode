@@ -116,12 +116,12 @@ public class IntersectionOfTwoLinkedLists_160 {
      * null==null;  true
      */
     public class Solution {
-        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-            if (headA == null || headB == null) return null;
-            ListNode pA = headA, pB = headB;
+        public ListNode getIntersectionNode(ListNode pHead1, ListNode pHead2) {
+            if (pHead1 == null || pHead2 == null) return null;
+            ListNode pA = pHead1, pB = pHead2;
             while (pA != pB) {
-                pA = pA == null ? headB : pA.next;
-                pB = pB == null ? headA : pB.next;
+                pA = pA == null ? pHead2 : pA.next;
+                pB = pB == null ? pHead1 : pB.next;
                // if (pA == null && pB == null) return null;
             }
             return pA;
@@ -130,15 +130,15 @@ public class IntersectionOfTwoLinkedLists_160 {
 //leetcode submit region end(Prohibit modification and deletion)
 
     public class Solution2 {
-        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-            if (headA == null || headB == null) return null;
-            ListNode pA = headA;
-            ListNode pB = headB;
+        public ListNode getIntersectionNode(ListNode pHead1, ListNode pHead2) {
+            if (pHead1 == null || pHead2 == null) return null;
+            ListNode pA = pHead1;
+            ListNode pB = pHead2;
             while (pA != pB) {
                 pA = pA.next;
                 pB = pB.next;
-                if (pB == null) pB = headA;
-                if (pA == null) pA = headB;
+                if (pB == null) pB = pHead1;
+                if (pA == null) pA = pHead2;
             }
             return pA;
         }
