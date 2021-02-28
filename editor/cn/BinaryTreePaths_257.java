@@ -18,7 +18,10 @@
 // Related Topics 树 深度优先搜索 
 // 👍 352 👎 0
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinaryTreePaths_257 {
     public static void main(String[] args) {
@@ -37,7 +40,35 @@ public class BinaryTreePaths_257 {
      */
     class Solution {
         public List<String> binaryTreePaths(TreeNode root) {
-            return null;
+            List<String> paths = new ArrayList<String>();
+            if (root == null) {
+                return paths;
+            }
+            Queue<TreeNode> nodeQueue = new LinkedList<TreeNode>();
+            Queue<String> pathQueue = new LinkedList<String>();
+
+            nodeQueue.offer(root);
+            pathQueue.offer(Integer.toString(root.val));
+
+            while (!nodeQueue.isEmpty()) {
+                TreeNode node = nodeQueue.poll();
+                String path = pathQueue.poll();
+
+                if (node.left == null && node.right == null) {
+                    paths.add(path);
+                } else {
+                    if (node.left != null) {
+                        nodeQueue.offer(node.left);
+                        pathQueue.offer(new StringBuffer(path).append("->").append(node.left.val).toString());
+                    }
+
+                    if (node.right != null) {
+                        nodeQueue.offer(node.right);
+                        pathQueue.offer(new StringBuffer(path).append("->").append(node.right.val).toString());
+                    }
+                }
+            }
+            return paths;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

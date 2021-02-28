@@ -24,6 +24,9 @@
 // Related Topics 树 深度优先搜索 
 // 👍 370 👎 0
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class PathSumIi_113 {
@@ -43,8 +46,30 @@ public class PathSumIi_113 {
      */
     class Solution {
         public List<List<Integer>> pathSum(TreeNode root, int sum) {
-            return null;
+            Deque<Integer> path = new ArrayDeque();
+            List<List<Integer>> res = new ArrayList<>();
+            dfs(root, sum, path, res);
+            return res;
         }
+
+        private void dfs(TreeNode node, int sum, Deque<Integer> path, List<List<Integer>> res) {
+
+            if (node == null) return;
+
+            // 递归终止条件 2
+            if (node.val == sum && node.left == null && node.right == null) {
+                // 当前结点的值还没添加到列表中，所以要先添加，然后再移除
+                path.addLast(node.val);
+                res.add(new ArrayList<>(path));
+                path.removeLast();
+                return;
+            }
+            path.addLast(node.val);
+            dfs(node.left,sum-node.val,path,res);
+            dfs(node.right,sum-node.val,path,res);
+            path.removeLast();
+        }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
