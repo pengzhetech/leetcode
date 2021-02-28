@@ -35,6 +35,9 @@
 // Related Topics 树 深度优先搜索 
 // 👍 210 👎 0
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class SumRootToLeafNumbers_129 {
     public static void main(String[] args) {
         Solution solution = new SumRootToLeafNumbers_129().new Solution();
@@ -52,7 +55,35 @@ public class SumRootToLeafNumbers_129 {
      */
     class Solution {
         public int sumNumbers(TreeNode root) {
-            return 0;
+
+            if(root==null) return 0;
+            Queue<TreeNode> nodeQueue = new LinkedList<>();
+            Queue<Integer> numQueue = new LinkedList<>();
+
+            numQueue.add(root.val);
+            nodeQueue.add(root);
+
+            int sum=0;
+
+            while(!nodeQueue.isEmpty()){
+                TreeNode treeNode = nodeQueue.poll();
+                int num=numQueue.poll();
+                TreeNode left = treeNode.left;
+                TreeNode right=treeNode.right;
+
+                if(left==null&&right==null)sum+=num;
+
+                if(left!=null){
+                    nodeQueue.add(left);
+                    numQueue.add(num*10+left.val);
+                }
+                if(right!=null){
+                    nodeQueue.add(right);
+                    numQueue.add(num*10+right.val);
+                }
+            }
+
+            return sum;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
