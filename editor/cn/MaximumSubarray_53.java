@@ -20,17 +20,17 @@ public class MaximumSubarray_53 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int maxSubArray(int[] nums) {
-            if (nums == null || nums.length == 0) return 0;
-            int length = nums.length;
+        public int maxSubArray(int[] arr) {
+            if (arr == null || arr.length == 0) return 0;
+            int length = arr.length;
 
             //dp数组
             int[] dp = new int[length];
 
-            dp[0] = nums[0];
+            dp[0] = arr[0];
 
             for (int i = 1; i < length; i++) {
-                dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+                dp[i] = Math.max(arr[i], dp[i - 1] + arr[i]);
             }
             int res = dp[0];
             for (int i = 1; i < length; i++) {
