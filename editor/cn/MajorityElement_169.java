@@ -17,8 +17,11 @@
 // Related Topics 位运算 数组 分治算法 
 // 👍 669 👎 0
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MajorityElement_169 {
     public static void main(String[] args) {
@@ -51,7 +54,18 @@ public class MajorityElement_169 {
 
             return majorityEntry.getKey();
         }
+
+        public int test(int[] nums) {
+            Map<Integer, Long> map = Arrays.stream(nums).boxed()
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            long limit = nums.length >> 1;
+            for (Map.Entry<Integer, Long> entry : map.entrySet())
+                if (entry.getValue() > limit)
+                    return entry.getKey();
+            return -1;
+        }
     }
+
 
 //leetcode submit region end(Prohibit modification and deletion)
 
