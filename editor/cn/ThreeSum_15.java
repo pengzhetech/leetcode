@@ -34,47 +34,47 @@ public class ThreeSum_15 {
      */
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public List<List<Integer>> threeSum(int[] nums) {
-            List<List<Integer>> result = new ArrayList<>();
-            if (nums == null || nums.length == 0) {//corner case
-                return result;
-            }
-            Arrays.sort(nums);
+        public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
 
-            int length = nums.length;
+            ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+            if(num==null||num.length<3)return ans;
 
-            for (int firstPointer = 0; firstPointer < length; firstPointer++) {//first pointer
-                if (firstPointer > 0 && nums[firstPointer] == nums[firstPointer - 1]) {
-                    continue;
-                }
-                int target = -nums[firstPointer];
-                int secondPointer = firstPointer + 1;
-                int thirdPointer = length - 1;
-                while (secondPointer < thirdPointer) {
-                    if (nums[secondPointer] + nums[thirdPointer] == target) {
-                        List<Integer> res = new ArrayList<>();
-                        res.add(nums[firstPointer]);
-                        res.add(nums[secondPointer]);
-                        res.add(nums[thirdPointer]);
-                        result.add(res);
-                        //数组是排序的并且是需要去重的,找到后如果指针不移动,或者只移动一个指针,再也不会出现
-                        // nums[secondPointer] + nums[thirdPointer] == target
-                        secondPointer++;
-                        thirdPointer--;
-                        while (secondPointer < length && nums[secondPointer] == nums[secondPointer - 1]) {
-                            secondPointer++;
+            Arrays.sort(num);
+
+            int length=num.length;
+
+            for(int i=0;i<length;i++){
+                int curNum=num[i];
+                if(curNum>=0)break;
+                if(num[i]==num[i+1])continue;
+                int left=i+1;
+                int right=length-1;
+
+                while(left<right){
+                    int sum=curNum+num[left]+num[right];
+                    if(sum==0){
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(curNum);
+                        list.add(num[left]);
+                        list.add(num[right]);
+                        ans.add(list);
+                        while(left<right&&num[left]==num[left+1]){
+                            left++;
                         }
-                        while (thirdPointer > secondPointer && nums[thirdPointer] == nums[thirdPointer + 1]) {
-                            thirdPointer--;
+                        while(left<right&&num[right]==num[right-1]){
+                            right--;
                         }
-                    } else if (nums[secondPointer] + nums[thirdPointer] > target) {
-                        thirdPointer--;
-                    } else {
-                        secondPointer++;
+                        left++;
+                        right--;
+                    }else if(sum<0){
+                        left++;
+                    }else {
+                        right--;
                     }
                 }
             }
-            return result;
+
+            return ans;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
