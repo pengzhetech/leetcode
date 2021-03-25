@@ -46,7 +46,7 @@ public class PathSumIi_113 {
      */
     class Solution {
         public List<List<Integer>> pathSum(TreeNode root, int sum) {
-            Deque<Integer> path = new ArrayDeque();
+            Deque<Integer> path = new ArrayDeque<>();
             List<List<Integer>> res = new ArrayList<>();
             dfs(root, sum, path, res);
             return res;
