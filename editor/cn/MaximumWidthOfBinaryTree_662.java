@@ -68,6 +68,9 @@
 // Related Topics 树 
 // 👍 157 👎 0
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class MaximumWidthOfBinaryTree_662 {
     public static void main(String[] args) {
         Solution solution = new MaximumWidthOfBinaryTree_662().new Solution();
@@ -91,7 +94,30 @@ public class MaximumWidthOfBinaryTree_662 {
      */
     class Solution {
         public int widthOfBinaryTree(TreeNode root) {
-            return 0;
+            if (root == null) return 0;
+            Deque<TreeNode> deque = new LinkedList<>();
+            root.val = 0;
+            deque.add(root);
+            int sum;
+            int ans = 0;
+            while (!deque.isEmpty()) {
+                sum = deque.size();
+                ans = Math.max(ans, deque.getLast().val - deque.getFirst().val);
+                while (sum > 0) {
+                    TreeNode temp = deque.remove();
+                    if (temp.left != null) {
+                        deque.add(temp.left);
+                        temp.left.val = temp.val * 2 + 1;
+                    }
+                    if (temp.right != null) {
+                        deque.add(deque.remove());
+                        temp.right.val = temp.val * 2 + 1;
+                    }
+                    sum--;
+                }
+            }
+            return ans;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
