@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * @author pengzhe
  * @date 2020/7/5 11:13
  * @description
  */
 
-public class RandomNode {
+public class RandomNode implements Serializable {
     int val;
     RandomNode next;
     RandomNode random;
