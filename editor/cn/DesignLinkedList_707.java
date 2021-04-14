@@ -1,3 +1,4 @@
+/*
 //设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针
 ///引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。 
 //
@@ -59,17 +60,21 @@ public class DesignLinkedList_707 {
         private int size;
         private ListNode dummy;
 
-        /**
+        */
+/**
          * Initialize your data structure here.
-         */
+         *//*
+
         public MyLinkedList() {
             this.size = 0;
             dummy = new ListNode(0);
         }
 
-        /**
+        */
+/**
          * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-         */
+         *//*
+
         public int get(int index) {
 
             //两种极端情况均需考虑,因为链表的索引是从0开始的,索引index=size时,角标已越界
@@ -83,23 +88,29 @@ public class DesignLinkedList_707 {
             return cur.val;
         }
 
-        /**
+        */
+/**
          * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
-         */
+         *//*
+
         public void addAtHead(int val) {
             addAtIndex(0, val);
         }
 
-        /**
+        */
+/**
          * Append a node of value val to the last element of the linked list.
-         */
+         *//*
+
         public void addAtTail(int val) {
             addAtIndex(size, val);
         }
 
-        /**
+        */
+/**
          * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
-         */
+         *//*
+
         public void addAtIndex(int index, int val) {
 
             if (index > size) return;
@@ -118,9 +129,11 @@ public class DesignLinkedList_707 {
 
         }
 
-        /**
+        */
+/**
          * Delete the index-th node in the linked list, if the index is valid.
-         */
+         *//*
+
         public void deleteAtIndex(int index) {
             if (index >= size || index < 0) return;
             size--;
@@ -133,6 +146,7 @@ public class DesignLinkedList_707 {
         }
     }
 
+*/
 /**
  * Your MyLinkedList object will be instantiated and called as such:
  * MyLinkedList obj = new MyLinkedList();
@@ -141,9 +155,11 @@ public class DesignLinkedList_707 {
  * obj.addAtTail(val);
  * obj.addAtIndex(index,val);
  * obj.deleteAtIndex(index);
- */
+ *//*
 
-    /**
+
+    */
+/**
      * Your MyLinkedList object will be instantiated and called as such:
      * MyLinkedList obj = new MyLinkedList();
      * int param_1 = obj.get(index);
@@ -151,7 +167,8 @@ public class DesignLinkedList_707 {
      * obj.addAtTail(val);
      * obj.addAtIndex(index,val);
      * obj.deleteAtIndex(index);
-     */
+     *//*
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 
@@ -168,9 +185,11 @@ public class DesignLinkedList_707 {
             tail.prev = head;
         }
 
-        /**
+        */
+/**
          * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-         */
+         *//*
+
         public int get(int index) {
             // if index is invalid
             if (index < 0 || index >= size) return -1;
@@ -188,9 +207,11 @@ public class DesignLinkedList_707 {
             return curr.val;
         }
 
-        /**
+        */
+/**
          * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
-         */
+         *//*
+
         public void addAtHead(int val) {
             ListNode pred = head, succ = head.next;
 
@@ -202,9 +223,11 @@ public class DesignLinkedList_707 {
             succ.prev = toAdd;
         }
 
-        /**
+        */
+/**
          * Append a node of value val to the last element of the linked list.
-         */
+         *//*
+
         public void addAtTail(int val) {
             ListNode succ = tail, pred = tail.prev;
 
@@ -216,9 +239,11 @@ public class DesignLinkedList_707 {
             succ.prev = toAdd;
         }
 
-        /**
+        */
+/**
          * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
-         */
+         *//*
+
         public void addAtIndex(int index, int val) {
             // If index is greater than the length,
             // the node will not be inserted.
@@ -249,9 +274,11 @@ public class DesignLinkedList_707 {
             succ.prev = toAdd;
         }
 
-        /**
+        */
+/**
          * Delete the index-th node in the linked list, if the index is valid.
-         */
+         *//*
+
         public void deleteAtIndex(int index) {
             // if the index is invalid, do nothing
             if (index < 0 || index >= size) return;
@@ -277,4 +304,4 @@ public class DesignLinkedList_707 {
     }
 
 
-}
+}*/
