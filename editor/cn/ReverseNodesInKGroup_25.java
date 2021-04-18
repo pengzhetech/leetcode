@@ -24,24 +24,63 @@
 // 
 // Related Topics 链表
 
-public class ReverseNodesInKGroup_25{
-      public static void main(String[] args) {
-           Solution solution = new ReverseNodesInKGroup_25().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        return null;
+public class ReverseNodesInKGroup_25 {
+    public static void main(String[] args) {
+        Solution solution = new ReverseNodesInKGroup_25().new Solution();
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public ListNode reverseKGroup(ListNode head, int k) {
+
+            ListNode dummy = new ListNode(-1);
+            dummy.next = head;
+
+            ListNode prev = dummy;
+            ListNode end = dummy;
+
+            while (end.next != null) {
+                for (int i = 0; i < k && end != null; i++) {
+                    end = end.next;
+                }
+                if (end == null) break;
+
+                ListNode start = prev.next;
+                ListNode next = end.next;
+                //断开这一组的连接
+                end.next = null;
+
+                prev.next = reverse(start);
+                start.next = next;
+                prev = start;
+                end = start;
+
+            }
+
+            return dummy.next;
+        }
+
+        private ListNode reverse(ListNode head) {
+            ListNode prev = null;
+            ListNode cur = head;
+            while (cur != null) {
+                ListNode next = cur.next;
+                cur.next = prev;
+                prev = cur;
+                cur = next;
+            }
+            return prev;
+
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}
