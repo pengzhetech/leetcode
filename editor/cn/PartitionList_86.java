@@ -30,10 +30,10 @@ public class PartitionList_86 {
             while (head != null) {
                 if (head.val < x) {
                     curMin.next = head;//将原链表的节点放入新链表中
-                    curMin = head;//新链表结点后移
+                    curMin = curMin.next;//新链表结点后移
                 } else {
                     curMax.next = head;
-                    curMax = head;
+                    curMax = curMax.next;
                 }
                 head = head.next;
             }
