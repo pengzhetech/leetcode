@@ -1,9 +1,6 @@
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @author pengzhe
@@ -75,9 +72,46 @@ public class TestCodes {
                 word.append(c);
             }
         }
-       // stack.offerFirst(word.toString());
+        // stack.offerFirst(word.toString());
         System.out.println(stack);
         return String.join(" ", stack);
+    }
+
+    @Test
+    public void testMap() {
+
+        String[] strings = {"abb", "abb", "ab", "c", "ff", "ab", "ff", "c", "ff", "c", "c"};
+        System.out.println(topKFrequent(strings, 2));
+
+
+    }
+
+    public List<String> topKFrequent(String[] nums, int k) {
+        //使用字典，统计每个元素出现的次数，元素为键，元素出现的次数为值
+        Map<String, Integer> map = new HashMap<>();
+        for (String num : nums) {
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+        // 遍历map，用最小堆保存频率最大的k个元素
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(map::get));
+        for (String key : map.keySet()) {
+            if (pq.size() < k) {
+                pq.add(key);
+            } else if (map.get(key) > map.get(pq.peek())) {
+                pq.remove();
+                pq.add(key);
+            }
+        }
+        // 取出最小堆中的元素
+        List<String> res = new ArrayList<>();
+        while (!pq.isEmpty()) {
+            res.add(pq.remove());
+        }
+        return res;
     }
 
 }
