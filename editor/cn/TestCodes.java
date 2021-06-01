@@ -114,4 +114,27 @@ public class TestCodes {
         return res;
     }
 
+    @Test
+    public void test2() {
+        System.out.println(isPalindrome(10));
+    }
+
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false;
+        String s = String.valueOf(x);
+        int length = s.length();
+        int begin = 0;
+        int end = length - 1;
+
+        while (begin <= end) {
+            int before = (int) (s.charAt(begin));
+            int after = (int) (s.charAt(end));
+            if (before != after) return false;
+            begin++;
+            end--;
+        }
+        return true;
+
+    }
+
 }
