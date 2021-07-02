@@ -66,12 +66,12 @@ public class DesignTwitter_355 {
         /**
          * 用户 id 和推文（单链表）的对应关系
          */
-        private Map<Integer, Tweet> twitter;
+        private final Map<Integer, Tweet> twitter;
 
         /**
          * 用户 id 和他关注的用户列表的对应关系
          */
-        private Map<Integer, Set<Integer>> followings;
+        private final Map<Integer, Set<Integer>> followings;
 
         /**
          * 全局使用的时间戳字段，用户每发布一条推文之前 + 1
